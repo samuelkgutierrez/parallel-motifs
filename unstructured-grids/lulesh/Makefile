@@ -1,5 +1,3 @@
-#default build suggestion of MPI + OPENMP with gcc on Livermore machines you might have to change the compiler name
-
 SHELL = /bin/sh
 .SUFFIXES: .cc .o
 
