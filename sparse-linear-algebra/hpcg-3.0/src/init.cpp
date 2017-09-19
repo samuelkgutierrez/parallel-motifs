@@ -37,7 +37,7 @@ const char* NULLDEVICE="/dev/null";
 
 #include "ReadHpcgDat.hpp"
 
-std::ofstream HPCG_fout; //!< output file stream for logging activities during HPCG run
+std::ofstream HPCG_of;
 
 static int
 startswith(const char * s, const char * prefix) {
@@ -135,17 +135,19 @@ HPCG_Init(int * argc_p, char ** *argv_p, HPCG_Params & params) {
   sprintf( fname, "hpcg_log_%04d.%02d.%02d.%02d.%02d.%02d.txt",
       1900 + ptm->tm_year, ptm->tm_mon+1, ptm->tm_mday, ptm->tm_hour, ptm->tm_min, ptm->tm_sec );
 
-  if (0 == params.comm_rank)
-    HPCG_fout.open(fname);
+  if (0 == params.comm_rank) {
+    //HPCG_of.open(fname);
+    //std::cout.rdbuf(HPCG_of.rdbuf());
+  }
   else {
 #if defined(HPCG_DEBUG) || defined(HPCG_DETAILED_DEBUG)
     char local[15];
     sprintf( local, "%d_", params.comm_rank );
     sprintf( fname, "hpcg_log_%s%04.d%02d.%02d.%02d.%02d.%02d.txt", local,
         1900 + ptm->tm_year, ptm->tm_mon+1, ptm->tm_mday, ptm->tm_hour, ptm->tm_min, ptm->tm_sec );
-    HPCG_fout.open(fname);
 #else
-    HPCG_fout.open(NULLDEVICE);
+    HPCG_of.open(NULLDEVICE);
+    std::cout.rdbuf(HPCG_of.rdbuf());
 #endif
   }
 

@@ -404,9 +404,7 @@ void ReportResults(const SparseMatrix & A, int numberOfMgLevels, int numberOfCgS
     }
 
     std::string yaml = doc.generateYAML();
-#ifdef HPCG_DEBUG
     HPCG_fout << yaml;
-#endif
   }
   return;
 }

@@ -25,6 +25,6 @@
 */
 int
 HPCG_Finalize(void) {
-  HPCG_fout.close();
+  HPCG_of.close();
   return 0;
 }

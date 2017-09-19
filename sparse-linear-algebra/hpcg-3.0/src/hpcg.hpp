@@ -22,8 +22,10 @@
 #define HPCG_HPP
 
 #include <fstream>
+#include <iostream>
 
-extern std::ofstream HPCG_fout;
+extern std::ofstream HPCG_of;
+#define HPCG_fout std::cout //!< output file stream for logging activities during HPCG run
 
 struct HPCG_Params_STRUCT {
   int comm_size; //!< Number of MPI processes in MPI_COMM_WORLD
